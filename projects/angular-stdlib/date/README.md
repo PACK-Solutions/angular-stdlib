@@ -1,24 +1,43 @@
-# Date
+# @angular-stdlib/date
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.2.0.
+## Installation
 
-## Code scaffolding
+| Angular | @angular-stdlib/date |
+| ------- | -------------------- |
+| 7 | 0.x |
 
-Run `ng generate component component-name --project date` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project date`.
-> Note: Don't forget to add `--project date` or else it will be added to the default project in your `angular.json` file. 
+Install `@angular-stdlib/date` from `npm`:
+```bash
+npm install @angular-stdlib/date --save
+```
 
-## Build
+## Features
 
-Run `ng build date` to build the project. The build artifacts will be stored in the `dist/` directory.
+### AngularDateHttpInterceptor
 
-## Publishing
+**@angular-stdlib/date** provides an interceptor that intercepts HTTP calls and converts from JSON response body : [ISO 8601](https://www.iso.org/fr/iso-8601-date-and-time-format.html) date and datetime strings to native Date object.
 
-After building your library with `ng build date`, go to the dist folder `cd dist/date` and run `npm publish`.
+To automatically use this interceptor, simply provide `AngularDateHttpInterceptor` as HTTP_INTERCEPTORS with `multi` flag enabled to keep Angular behavior:
 
-## Running unit tests
+```typescript
+import { AngularDateHttpInterceptor } from '@ps-angular-common/date';
 
-Run `ng test date` to execute the unit tests via [Karma](https://karma-runner.github.io).
+@NgModule({
+  declarations: [AppComponent],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AngularDateHttpInterceptor, multi: true}
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
 
-## Further help
+> NOTE - `AngularDateHttpInterceptor` is only necessary due to [ngx-bootstrap/datepicker](https://github.com/valor-software/ngx-bootstrap/tree/development/src/datepicker) dependency use, this one does not handle "ISO string dates" unlike Angular. Linked to this unresolved issue: https://github.com/valor-software/ngx-bootstrap/issues/4487
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+### DateFormatter
+
+`DateFormatter` is a static class that provides :
+* **ISO_DATE** string format (*yyyy-MM-dd*) to use with Angular [DatePipe](https://angular.io/api/common/DatePipe).
+* `toFakeSerializedDate(date: Date)` method transforms the param date in the same way as it is serialized :
+   * Serialization uses `JSON.stringify` method which use the date `toJSON()` method which transforms the date into UTC Z.
+   * Only use when you have to serialize dates and you don't want serialization to apply zero UTC offset transformation.
