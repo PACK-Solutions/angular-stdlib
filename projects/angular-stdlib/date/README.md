@@ -1,3 +1,5 @@
+ [![npm version](https://badge.fury.io/js/%40angular-stdlib%2Fdate.svg)](https://badge.fury.io/js/%40angular-stdlib%2Fdate)
+
 # @angular-stdlib/date
 
 ## Installation
