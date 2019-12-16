@@ -34,12 +34,13 @@ import { AngularDateHttpInterceptor } from '@ps-angular-common/date';
 export class AppModule { }
 ```
 
-> NOTE - `AngularDateHttpInterceptor` is only necessary due to [ngx-bootstrap/datepicker](https://github.com/valor-software/ngx-bootstrap/tree/development/src/datepicker) dependency use, this one does not handle "ISO string dates" unlike Angular. Linked to this unresolved issue: https://github.com/valor-software/ngx-bootstrap/issues/4487
+> NOTE - `AngularDateHttpInterceptor` for projects using dependencies like [ngx-bootstrap/datepicker](https://github.com/valor-software/ngx-bootstrap/tree/development/src/datepicker), this one does not handle "ISO string dates" unlike Angular.<br>
+> Linked to this open issue: https://github.com/valor-software/ngx-bootstrap/issues/4487
 
 ### DateFormatter
 
 `DateFormatter` is a static class that provides :
 * **ISO_DATE** string format (*yyyy-MM-dd*) to use with Angular [DatePipe](https://angular.io/api/common/DatePipe).
-* `toFakeSerializedDate(date: Date)` method transforms the param date in the same way as it is serialized :
-   * Serialization uses `JSON.stringify` method which use the date `toJSON()` method which transforms the date into UTC Z.
+* `toFakeSerializedDate(date: Date)` method : transforms the param date in the same way as it would be serialized :
+   * Serialization uses `JSON.stringify` method which use the `toJSON()` date method which transforms the date into UTC Z.
    * Only use when you have to serialize dates and you don't want serialization to apply zero UTC offset transformation.

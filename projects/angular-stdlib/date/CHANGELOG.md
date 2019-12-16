@@ -9,7 +9,7 @@
 
 ### Features
 
-* **AngularDateHttpInterceptor:** Interceptor that handle Http Request and convert from JSON response body : **ISO 8601** date and datetime to Date object.
-  > Only necessary due to `ngx-bootstrap/datepicker` dependency use, this one does not handle *ISO string dates* unlike **Angular**.<br/>
-  > Linked to this unresolved issue : https://github.com/valor-software/ngx-bootstrap/issues/4487
+* **AngularDateHttpInterceptor:** provides an interceptor that intercepts HTTP calls and converts from JSON response body : **ISO 8601** date and datetime strings to native Date object.
+  > NOTE - Only necessary for projects using dependencies like `ngx-bootstrap/datepicker`, this one does not handle *ISO string dates* unlike **Angular**.<br/>
+  > Linked to this open issue : https://github.com/valor-software/ngx-bootstrap/issues/4487
 * **DateFormatter:** contains ISO_DATE formatter.
