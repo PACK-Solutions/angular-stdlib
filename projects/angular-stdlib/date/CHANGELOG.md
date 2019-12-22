@@ -1,3 +1,10 @@
+# 0.2.1 (2019-12-22)
+
+### Bug Fixes
+
+* **README:** fix `AngularDateHttpInterceptor` example ([#1](https://github.com/PACK-Solutions/angular-stdlib/issues/1))
+
+
 # 0.2.0 (2019-11-18)
 
 ### Features
