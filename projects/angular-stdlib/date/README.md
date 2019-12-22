@@ -22,7 +22,7 @@ npm install @angular-stdlib/date --save
 To automatically use this interceptor, simply provide `AngularDateHttpInterceptor` as HTTP_INTERCEPTORS with `multi` flag enabled to keep Angular behavior:
 
 ```typescript
-import { AngularDateHttpInterceptor } from '@ps-angular-common/date';
+import { AngularDateHttpInterceptor } from '@angular-stdlib/date';
 
 @NgModule({
   declarations: [AppComponent],
