@@ -1,9 +1,9 @@
 import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { AngularDateHttpInterceptor } from './angular-date-http-interceptor';
+import { DateHttpInterceptor } from './date-http-interceptor';
 
-describe('AngularDateHttpInterceptor', () => {
+describe('DateHttpInterceptor', () => {
 
   let http: HttpClient;
   let mock: HttpTestingController;
@@ -13,7 +13,7 @@ describe('AngularDateHttpInterceptor', () => {
       imports: [ HttpClientTestingModule ],
       providers: [{
         provide: HTTP_INTERCEPTORS,
-        useClass: AngularDateHttpInterceptor,
+        useClass: DateHttpInterceptor,
         multi: true
       }]
     });
@@ -22,7 +22,7 @@ describe('AngularDateHttpInterceptor', () => {
   });
 
   it('should create an instance', () => {
-    expect(new AngularDateHttpInterceptor()).toBeTruthy();
+    expect(new DateHttpInterceptor()).toBeTruthy();
   });
 
   it('should intercept http request with a null body', () => {
@@ -88,75 +88,39 @@ describe('AngularDateHttpInterceptor', () => {
   });
 
   it('should intercept http request with a body containing a date "yyyy-MM-dd"', () => {
-    http.get<any>('/api').subscribe(
-      response => expect(response.date).toEqual(new Date('2018-05-15')),
-      fail
-    );
-    verify(mock, { date: '2018-05-15' });
+    verifyDate(http, mock, '2018-05-15');
   });
 
   it('should intercept http request with a body containing a datetime "yyyy-MM-ddThh:mm:ss"', () => {
-    http.get<any>('/api').subscribe(
-      response => expect(response.date).toEqual(new Date('2018-05-15T15:12:10')),
-      fail
-    );
-    verify(mock, { date: '2018-05-15T15:12:10' });
+    verifyDate(http, mock, '2018-05-15T15:12:10');
   });
 
   it('should intercept http request with a body containing a datetime "yyyy-MM-ddThh:mm:ss+00:00"', () => {
-    http.get<any>('/api').subscribe(
-      response => expect(response.date).toEqual(new Date('2018-05-15T15:12:10+05:00')),
-      fail
-    );
-    verify(mock, { date: '2018-05-15T15:12:10+05:00' });
+    verifyDate(http, mock, '2018-05-15T15:12:10+05:00');
   });
 
   it('should intercept http request with a body containing a datetime "yyyy-MM-ddThh:mm:ss-01:00"', () => {
-    http.get<any>('/api').subscribe(
-      response => expect(response.date).toEqual(new Date('2018-05-15T15:12:10-05:00')),
-      fail
-    );
-    verify(mock, { date: '2018-05-15T15:12:10-05:00' });
+    verifyDate(http, mock, '2018-05-15T15:12:10-05:00');
   });
 
   it('should intercept http request with a body containing a datetime "yyyy-MM-ddThh:mm:ssZ"', () => {
-    http.get<any>('/api').subscribe(
-      response => expect(response.date).toEqual(new Date('2018-05-15T15:12:10Z')),
-      fail
-    );
-    verify(mock, { date: '2018-05-15T15:12:10Z' });
+    verifyDate(http, mock, '2018-05-15T15:12:10Z');
   });
 
   it('should intercept http request with a body containing a datetime "yyyy-MM-ddThh:mm:ss.sss"', () => {
-    http.get<any>('/api').subscribe(
-      response => expect(response.date).toEqual(new Date('2018-05-15T15:12:10.524')),
-      fail
-    );
-    verify(mock, { date: '2018-05-15T15:12:10.524' });
+    verifyDate(http, mock, '2018-05-15T15:12:10.524');
   });
 
   it('should intercept http request with a body containing a datetime "yyyy-MM-ddThh:mm:ss.sss+00:00"', () => {
-    http.get<any>('/api').subscribe(
-      response => expect(response.date).toEqual(new Date('2018-05-15T15:12:10.524+05:00')),
-      fail
-    );
-    verify(mock, { date: '2018-05-15T15:12:10.524+05:00' });
+    verifyDate(http, mock, '2018-05-15T15:12:10.524+05:00');
   });
 
   it('should intercept http request with a body containing a datetime "yyyy-MM-ddThh:mm:ss.sss-01:00"', () => {
-    http.get<any>('/api').subscribe(
-      response => expect(response.date).toEqual(new Date('2018-05-15T15:12:10.524-05:00')),
-      fail
-    );
-    verify(mock, { date: '2018-05-15T15:12:10.524-05:00' });
+    verifyDate(http, mock, '2018-05-15T15:12:10.524-05:00');
   });
 
   it('should intercept http request with a body containing a datetime "yyyy-MM-ddThh:mm:ss.sssZ"', () => {
-    http.get<any>('/api').subscribe(
-      response => expect(response.date).toEqual(new Date('2018-05-15T15:12:10.524Z')),
-      fail
-    );
-    verify(mock, { date: '2018-05-15T15:12:10.524Z' });
+    verifyDate(http, mock, '2018-05-15T15:12:10.524Z');
   });
 
 });
@@ -165,4 +129,12 @@ function verify(mock: HttpTestingController, body: any) {
   const request = mock.expectOne(req => req.method === 'GET' && req.url === '/api');
   request.flush(body);
   mock.verify();
+}
+
+function verifyDate(http: HttpClient, mock: HttpTestingController, dateAsString: string) {
+  http.get<any>('/api').subscribe(
+    response => expect(response.date).toEqual(new Date(dateAsString)),
+    fail
+  );
+  verify(mock, { date: dateAsString });
 }

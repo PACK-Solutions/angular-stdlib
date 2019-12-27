@@ -9,7 +9,7 @@ import { tap } from 'rxjs/operators';
  * Linked to this unresolved issue : https://github.com/valor-software/ngx-bootstrap/issues/4487
  */
 @Injectable()
-export class AngularDateHttpInterceptor implements HttpInterceptor {
+export class DateHttpInterceptor implements HttpInterceptor {
 
   /**
    * Regular expression for ISO 8601 date and date time
