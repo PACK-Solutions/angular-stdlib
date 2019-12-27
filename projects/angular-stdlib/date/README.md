@@ -15,26 +15,26 @@ npm install @angular-stdlib/date --save
 
 ## Features
 
-### AngularDateHttpInterceptor
+### DateHttpInterceptor
 
 **@angular-stdlib/date** provides an interceptor that intercepts HTTP calls and converts from JSON response body : [ISO 8601](https://www.iso.org/fr/iso-8601-date-and-time-format.html) date and datetime strings to native Date object.
 
-To automatically use this interceptor, simply provide `AngularDateHttpInterceptor` as HTTP_INTERCEPTORS with `multi` flag enabled to keep Angular behavior:
+To automatically use this interceptor, simply provide `DateHttpInterceptor` as HTTP_INTERCEPTORS with `multi` flag enabled to keep Angular behavior:
 
 ```typescript
-import { AngularDateHttpInterceptor } from '@angular-stdlib/date';
+import { DateHttpInterceptor } from '@angular-stdlib/date';
 
 @NgModule({
   declarations: [AppComponent],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AngularDateHttpInterceptor, multi: true}
+    { provide: HTTP_INTERCEPTORS, useClass: DateHttpInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
 ```
 
-> NOTE - `AngularDateHttpInterceptor` for projects using dependencies like [ngx-bootstrap/datepicker](https://github.com/valor-software/ngx-bootstrap/tree/development/src/datepicker), this one does not handle "ISO string dates" unlike Angular.<br>
+> NOTE - `DateHttpInterceptor` for projects using dependencies like [ngx-bootstrap/datepicker](https://github.com/valor-software/ngx-bootstrap/tree/development/src/datepicker), this one does not handle "ISO string dates" unlike Angular.<br>
 > Linked to this open issue: https://github.com/valor-software/ngx-bootstrap/issues/4487
 
 ### DateFormatter
