@@ -3,7 +3,8 @@ import { DateValidators } from './date-validators';
 
 describe('DateValidators', () => {
 
-  const stringFormatDate = '2019-01-01';
+  const badFormat = new Date('Invalid date');
+  const isoString = '2019-01-01';
   const firstDate = new Date('2018-01-01');
   const secondDate = new Date('2020-01-01');
 
@@ -13,14 +14,44 @@ describe('DateValidators', () => {
     expect(dateControl.hasError('date')).toBeFalsy();
   });
 
-  it('should have invalid date', () => {
-    const dateControl = new FormControl(stringFormatDate, DateValidators.date);
+  it('should have valid date (null)', () => {
+    const dateControl = new FormControl(null, DateValidators.date);
+    expect(dateControl.valid).toBeTruthy();
+    expect(dateControl.hasError('date')).toBeFalsy();
+  });
+
+  it('should have valid date (undefined)', () => {
+    const dateControl = new FormControl(undefined, DateValidators.date);
+    expect(dateControl.valid).toBeTruthy();
+    expect(dateControl.hasError('date')).toBeFalsy();
+  });
+
+  it('should have valid date (empty string)', () => {
+    const dateControl = new FormControl('', DateValidators.date);
+    expect(dateControl.valid).toBeTruthy();
+    expect(dateControl.hasError('date')).toBeFalsy();
+  });
+
+  it('should have invalid date (bad format)', () => {
+    const dateControl = new FormControl(badFormat, DateValidators.date);
+    expect(dateControl.valid).toBeFalsy();
+    expect(dateControl.hasError('date')).toBeTruthy();
+  });
+
+  it('should have invalid date (ISO string)', () => {
+    const dateControl = new FormControl(isoString, DateValidators.date);
+    expect(dateControl.valid).toBeFalsy();
+    expect(dateControl.hasError('date')).toBeTruthy();
+  });
+
+  it('should have invalid date (number)', () => {
+    const dateControl = new FormControl(0, DateValidators.date);
     expect(dateControl.valid).toBeFalsy();
     expect(dateControl.hasError('date')).toBeTruthy();
   });
 
   it('should have invalid date (all DateValidators)', () => {
-    const dateControl = new FormControl(stringFormatDate, [
+    const dateControl = new FormControl(isoString, [
       DateValidators.date,
       DateValidators.beforeDate(firstDate),
       DateValidators.notBeforeDate(secondDate),
@@ -39,8 +70,16 @@ describe('DateValidators', () => {
     expectValidDate(firstDate, DateValidators.beforeDate(secondDate), 'beforeDate');
   });
 
-  it('should be before date valid (bad format date)', () => {
-    expectValidDate(stringFormatDate, DateValidators.beforeDate(secondDate), 'beforeDate');
+  it('should be before date valid (bad format)', () => {
+    expectValidDate(badFormat, DateValidators.beforeDate(secondDate), 'beforeDate');
+  });
+
+  it('should be before date valid (ISO string)', () => {
+    expectValidDate(isoString, DateValidators.beforeDate(secondDate), 'beforeDate');
+  });
+
+  it('should be before date valid (null param)', () => {
+    expectValidDate(new Date(), DateValidators.beforeDate(null), 'beforeDate');
   });
 
   it('should be before date invalid (same dates)', () => {
@@ -65,8 +104,16 @@ describe('DateValidators', () => {
     expectValidDate(secondDate, DateValidators.notBeforeDate(firstDate), 'notBeforeDate');
   });
 
-  it('should not be before date valid (bad format date)', () => {
-    expectValidDate(stringFormatDate, DateValidators.notBeforeDate(secondDate), 'notBeforeDate');
+  it('should not be before date valid (bad format)', () => {
+    expectValidDate(badFormat, DateValidators.notBeforeDate(secondDate), 'notBeforeDate');
+  });
+
+  it('should not be before date valid (ISO string)', () => {
+    expectValidDate(isoString, DateValidators.notBeforeDate(secondDate), 'notBeforeDate');
+  });
+
+  it('should not be before date valid (null param)', () => {
+    expectValidDate(new Date(), DateValidators.notBeforeDate(null), 'notBeforeDate');
   });
 
   it('should not be before date valid (same dates)', () => {
@@ -89,8 +136,16 @@ describe('DateValidators', () => {
     expectValidDate(secondDate, DateValidators.afterDate(firstDate), 'afterDate');
   });
 
-  it('should be after date valid (bad format date)', () => {
-    expectValidDate(stringFormatDate, DateValidators.afterDate(secondDate), 'afterDate');
+  it('should be after date valid (bad format)', () => {
+    expectValidDate(badFormat, DateValidators.afterDate(secondDate), 'afterDate');
+  });
+
+  it('should be after date valid (ISO string)', () => {
+    expectValidDate(isoString, DateValidators.afterDate(secondDate), 'afterDate');
+  });
+
+  it('should be after date valid (null param)', () => {
+    expectValidDate(new Date(), DateValidators.afterDate(null), 'afterDate');
   });
 
   it('should be after date invalid (same dates)', () => {
@@ -115,8 +170,16 @@ describe('DateValidators', () => {
     expectValidDate(firstDate, DateValidators.notAfterDate(secondDate), 'notAfterDate');
   });
 
-  it('should not be after date valid (bad format date)', () => {
-    expectValidDate(stringFormatDate, DateValidators.notAfterDate(secondDate), 'notAfterDate');
+  it('should not be after date valid (bad format)', () => {
+    expectValidDate(badFormat, DateValidators.notAfterDate(secondDate), 'notAfterDate');
+  });
+
+  it('should not be after date valid (ISO string)', () => {
+    expectValidDate(isoString, DateValidators.notAfterDate(secondDate), 'notAfterDate');
+  });
+
+  it('should not be after date valid (null param)', () => {
+    expectValidDate(new Date(), DateValidators.notAfterDate(null), 'notAfterDate');
   });
 
   it('should not be after date valid (same dates)', () => {

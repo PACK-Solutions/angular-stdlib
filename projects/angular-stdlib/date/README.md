@@ -96,4 +96,5 @@ Provides a set of built-in validators for Dates that can be used by form control
   console.log(control.errors); // {notAfterDate: {dateName: 'birthdate'}}
   ```
 
-For **beforeDate**, **notBeforeDate**, **afterDate** and **notAfterDate**, if control's value is not a `Date`, validation is always a success.
+> NOTE - For **beforeDate**, **notBeforeDate**, **afterDate** and **notAfterDate**, if control's value is not a `Date`, validation will always be a success.<br>
+> To check date format, combine previous validator with `DateValidators.date`.

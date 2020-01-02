@@ -1,11 +1,11 @@
 import { AbstractControl, ValidatorFn, ValidationErrors } from '@angular/forms';
 
-function isEmptyOrDate(value: any): boolean {
-  return value == null || value instanceof Date;
+function isEmptyValue(value: any): boolean {
+  return value == null || value.length === 0;
 }
 
-function isValid(value: Date, dateParam: Date, operator): boolean {
-  if (value == null || !(value instanceof Date) || dateParam == null || operator(value, dateParam)) {
+function isValid(value: any, dateParam: Date, operator): boolean {
+  if (isEmptyValue(value) || !(value instanceof Date) || isNaN(value.getTime()) || dateParam == null || operator(value, dateParam)) {
     return true;
   }
   return false;
@@ -16,7 +16,8 @@ function buildErrorValue(dateName?: string): true | { dateName: string } {
 }
 
 function date(control: AbstractControl): ValidationErrors | null {
-  if (isEmptyOrDate(control.value)) {
+  const value = control.value;
+  if (isEmptyValue(value) || (value instanceof Date && !isNaN(value.getTime()))) {
     return null;
   }
   return { date: true };
