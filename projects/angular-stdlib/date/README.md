@@ -2,6 +2,8 @@
 
 # @angular-stdlib/date
 
+> WARNING - Library is under development and may have API breaking changes for versions prior to 1.0.0.
+
 ## Installation
 
 | Angular | @angular-stdlib/date |
@@ -44,3 +46,55 @@ export class AppModule { }
 * `toFakeSerializedDate(date: Date)` method : transforms the param date in the same way as it would be serialized :
    * Serialization uses `JSON.stringify` method which use the `toJSON()` date method which transforms the date into UTC Z.
    * Only use when you have to serialize dates and you don't want serialization to apply zero UTC offset transformation.
+
+### DateValidators
+
+Provides a set of built-in validators for Dates that can be used by form controls :
+* **date** : Validator that requires the control's value to be a `Date` :
+  ```typescript
+  const control = new FormControl(123, DateValidators.date);
+  console.log(control.errors); // {date: true}
+  ```
+* **beforeDate** : Validator that requires the control's value to be prior than the date in parameter :
+  ```typescript
+  const control = new FormControl(new Date('2020-01-01'), DateValidators.beforeDate(new Date('2019-01-01')));
+  console.log(control.errors); // {beforeDate: true}
+  ```
+  With optional `dateName` parameter :
+  ```typescript
+  const control = new FormControl(new Date('2020-01-01'), DateValidators.beforeDate(new Date('2019-01-01'), 'birthdate'));
+  console.log(control.errors); // {beforeDate: {dateName: 'birthdate'}}
+  ```
+* **notBeforeDate** : Validator that requires the control's value not to be prior than the date in parameter :
+  ```typescript
+  const control = new FormControl(new Date('2019-01-01'), DateValidators.notBeforeDate(new Date('2020-01-01')));
+  console.log(control.errors); // {notBeforeDate: true}
+  ```
+  With optional `dateName` parameter :
+  ```typescript
+  const control = new FormControl(new Date('2019-01-01'), DateValidators.notBeforeDate(new Date('2020-01-01'), 'birthdate'));
+  console.log(control.errors); // {notBeforeDate: {dateName: 'birthdate'}}
+  ```
+* **afterDate** : Validator that requires the control's value to be later than the date in parameter :
+  ```typescript
+  const control = new FormControl(new Date('2019-01-01'), DateValidators.afterDate(new Date('2020-01-01')));
+  console.log(control.errors); // {afterDate: true}
+  ```
+  With optional `dateName` parameter :
+  ```typescript
+  const control = new FormControl(new Date('2019-01-01'), DateValidators.afterDate(new Date('2020-01-01'), 'birthdate'));
+  console.log(control.errors); // {afterDate: {dateName: 'birthdate'}}
+  ```
+* **notAfterDate** : Validator that requires the control's value not to be later than the date in parameter :
+  ```typescript
+  const control = new FormControl(new Date('2020-01-01'), DateValidators.notAfterDate(new Date('2019-01-01')));
+  console.log(control.errors); // {notAfterDate: true}
+  ```
+  With optional `dateName` parameter :
+  ```typescript
+  const control = new FormControl(new Date('2020-01-01'), DateValidators.notAfterDate(new Date('2019-01-01'), 'birthdate'));
+  console.log(control.errors); // {notAfterDate: {dateName: 'birthdate'}}
+  ```
+
+> NOTE - For **beforeDate**, **notBeforeDate**, **afterDate** and **notAfterDate**, if control's value is not a `Date`, validation will always be a success.<br>
+> To check date format, combine previous validator with `DateValidators.date`.
