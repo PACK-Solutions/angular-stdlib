@@ -44,7 +44,7 @@ Do not add your issue as a comment to an existing issue unless it's for the iden
 
 The more information you can provide, the more likely someone will be successful at reproducing the issue and finding a fix.
 
-## <a name="#submit"></a> Submitting a Pull Request (PR)
+## <a name="submit"></a> Submitting a Pull Request (PR)
 
 It is good to read this article first : [Understanding the GitHub flow](https://guides.github.com/introduction/flow/).
 
@@ -117,7 +117,7 @@ from the main (upstream) repository:
     git pull --ff upstream master
     ```
 
-## <a name="#rules"></a> Coding Rules
+## <a name="rules"></a> Coding Rules
 
 To ensure consistency throughout the source code, keep these rules in mind as you are working:
 
@@ -129,7 +129,7 @@ We recommend the use of [VS Code](https://code.visualstudio.com/), but you can k
   * [TSLint](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-typescript-tslint-plugin)
   * [SonarLint](https://marketplace.visualstudio.com/items?itemName=SonarSource.sonarlint-vscode)
 
-## <a name="#commit"></a> Commit Message Guidelines
+## <a name="commit"></a> Commit Message Guidelines
 
 As commit convention, we adopt [Conventional Commits v1.0.0](https://www.conventionalcommits.org/en/v1.0.0/), we have an history of commits that do not adopt the convention but any new commit must follow it to be eligible for merge.
 
