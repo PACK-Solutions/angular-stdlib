@@ -6,7 +6,11 @@
   "keywords": [
     "angular",
     "stdlib",
-    "date"
+    "date",
+    "validator",
+    "validation",
+    "iso8601",
+    "interceptor"
   ],
   "homepage": "https://github.com/PACK-Solutions/angular-stdlib/tree/master/projects/angular-stdlib/date#readme",
   "repository": {
