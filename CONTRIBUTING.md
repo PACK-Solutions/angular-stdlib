@@ -17,7 +17,7 @@ Please read and follow our [Code of Conduct](https://github.com/PACK-Solutions/a
 
 ## <a name="question"></a> Asking Questions
 
-Have a question? Rather than opening an issue, please ask us at omistral@pack-solutions.com.
+Have a question? Rather than opening an issue, please ask us at oss@pack-solutions.com.
 
 ## <a name="issue"></a> Reporting Issues
 
