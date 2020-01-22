@@ -1,3 +1,12 @@
+# 0.3.1 (2020-01-22)
+
+### GitHub
+
+* add a contributing file, closes ([#9](https://github.com/PACK-Solutions/angular-stdlib/issues/9))
+* **date:** add relevant keywords to `package.json`, closes ([#11](https://github.com/PACK-Solutions/angular-stdlib/issues/11))
+* replace contact email address with oss@pack-solutions.com, closes ([#8](https://github.com/PACK-Solutions/angular-stdlib/issues/8))
+
+
 # 0.3.0 (2020-01-04)
 
 ### BREAKING CHANGES
