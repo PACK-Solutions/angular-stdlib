@@ -5,7 +5,7 @@
   "scripts": {
     "build": "ng build",
     "test": "ng test",
-    "testCI": "ng test --browsers=ChromeHeadless --watch=false --codeCoverage=true",
+    "test:ci": "ng test --browsers=ChromeHeadless --no-watch --no-progress --code-coverage",
     "lint": "ng lint"
   },
   "dependencies": {
