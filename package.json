@@ -39,6 +39,7 @@
     "karma-coverage-istanbul-reporter": "~2.0.1",
     "karma-jasmine": "~1.1.2",
     "karma-jasmine-html-reporter": "^0.2.2",
+    "karma-sonarqube-unit-reporter": "0.0.23",
     "ng-packagr": "^5.7.1",
     "ts-node": "~7.0.0",
     "tsickle": ">=0.34.0",

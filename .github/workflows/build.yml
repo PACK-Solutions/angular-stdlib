@@ -26,8 +26,8 @@ jobs:
         if: matrix.node == '12.x' && matrix.os =='ubuntu-latest'
         uses: actions/upload-artifact@v2
         with:
-          name: code-coverage-reports
-          path: coverage/angular-stdlib/**/lcov.info
+          name: test-reports
+          path: reports
   sonar:
     needs: build
     runs-on: ubuntu-latest
@@ -37,8 +37,8 @@ jobs:
       - name: Download code coverage reports
         uses: actions/download-artifact@v2
         with:
-          name: code-coverage-reports
-          path: coverage/angular-stdlib
+          name: test-reports
+          path: reports
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
